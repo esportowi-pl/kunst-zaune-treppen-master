@@ -39,7 +39,7 @@ const ProjectCounters = () => {
         }));
 
         if (step >= steps) {
-          clearInterval(timers[timers.indexOf(timer)]);
+          clearInterval(timers[Object.keys(finalCounts).indexOf(key)]);
         }
       }, stepDuration);
     });

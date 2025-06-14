@@ -66,6 +66,45 @@ export type Database = {
         }
         Relationships: []
       }
+      reviews: {
+        Row: {
+          client_location: string
+          client_name: string
+          created_at: string
+          google_review_url: string | null
+          id: string
+          is_featured: boolean
+          project_type: string
+          rating: number
+          review_text: string
+          updated_at: string
+        }
+        Insert: {
+          client_location: string
+          client_name: string
+          created_at?: string
+          google_review_url?: string | null
+          id?: string
+          is_featured?: boolean
+          project_type: string
+          rating: number
+          review_text: string
+          updated_at?: string
+        }
+        Update: {
+          client_location?: string
+          client_name?: string
+          created_at?: string
+          google_review_url?: string | null
+          id?: string
+          is_featured?: boolean
+          project_type?: string
+          rating?: number
+          review_text?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       team_members: {
         Row: {
           bio: string | null

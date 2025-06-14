@@ -57,7 +57,16 @@ export default function ReviewsManagement() {
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching reviews:', error);
+        toast({
+          title: "Błąd",
+          description: "Nie udało się pobrać opinii. " + error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
       setReviews(data || []);
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -102,11 +111,11 @@ export default function ReviewsManagement() {
 
       resetForm();
       fetchReviews();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving review:', error);
       toast({
         title: "Błąd",
-        description: "Nie udało się zapisać opinii.",
+        description: "Nie udało się zapisać opinii. " + (error.message || ''),
         variant: "destructive",
       });
     }
@@ -129,11 +138,11 @@ export default function ReviewsManagement() {
       });
       
       fetchReviews();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error deleting review:', error);
       toast({
         title: "Błąd",
-        description: "Nie udało się usunąć opinii.",
+        description: "Nie udało się usunąć opinii. " + (error.message || ''),
         variant: "destructive",
       });
     }
@@ -154,11 +163,11 @@ export default function ReviewsManagement() {
       });
       
       fetchReviews();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error updating featured status:', error);
       toast({
         title: "Błąd",
-        description: "Nie udało się zaktualizować statusu opinii.",
+        description: "Nie udało się zaktualizować statusu opinii. " + (error.message || ''),
         variant: "destructive",
       });
     }
@@ -396,6 +405,12 @@ export default function ReviewsManagement() {
               ))}
             </TableBody>
           </Table>
+
+          {reviews.length === 0 && (
+            <div className="text-center py-8 text-gray-500">
+              Brak opinii. Dodaj pierwszą opinię klienta.
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
