@@ -22,6 +22,7 @@ import ContentManagement from "./pages/admin/ContentManagement";
 import ProjectsManagement from "./pages/admin/ProjectsManagement";
 import TeamManagement from "./pages/admin/TeamManagement";
 import Settings from "./pages/admin/Settings";
+import CreateAdmin from "./pages/admin/CreateAdmin";
 import AdminLayout from "./components/admin/AdminLayout";
 
 // Components
@@ -40,6 +41,7 @@ const App = () => (
           <Routes>
             {/* Admin Routes */}
             <Route path="/admin/login" element={<Login />} />
+            <Route path="/admin/create-first-admin" element={<CreateAdmin />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="content" element={<ContentManagement />} />
@@ -48,27 +50,24 @@ const App = () => (
               <Route path="settings" element={<Settings />} />
             </Route>
 
-            {/* Public Routes */}
-            <Route
-              path="/"
-              element={
-                <>
-                  <Navbar />
-                  <main className="min-h-screen pt-16">
-                    <Routes>
-                      <Route path="/" element={<Index />} />
-                      <Route path="/metallzaune" element={<Metallzaune />} />
-                      <Route path="/holztreppen" element={<Holztreppen />} />
-                      <Route path="/projekte" element={<Projekte />} />
-                      <Route path="/uber-uns" element={<UberUns />} />
-                      <Route path="/kontakt" element={<Kontakt />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </main>
-                  <Footer />
-                </>
-              }
-            />
+            {/* Public Routes with Layout */}
+            <Route path="/*" element={
+              <>
+                <Navbar />
+                <main className="min-h-screen pt-16">
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/metallzaune" element={<Metallzaune />} />
+                    <Route path="/holztreppen" element={<Holztreppen />} />
+                    <Route path="/projekte" element={<Projekte />} />
+                    <Route path="/uber-uns" element={<UberUns />} />
+                    <Route path="/kontakt" element={<Kontakt />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </main>
+                <Footer />
+              </>
+            } />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -28,7 +27,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Edit, Trash, Plus, Image as ImageIcon } from "lucide-react";
+import { Edit, Trash, Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -49,7 +48,7 @@ interface Project {
 
 const formSchema = z.object({
   title: z.string().min(1, "Titel ist erforderlich"),
-  description: z.string().optional(),
+  description: z.string().min(1, "Beschreibung ist erforderlich"),
   image_url: z.string().optional(),
   category: z.string().min(1, "Kategorie ist erforderlich"),
   completion_date: z.string().optional(),
@@ -342,7 +341,7 @@ export default function ProjectsManagement() {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Beschreibung</FormLabel>
+                    <FormLabel>Beschreibung*</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Projektbeschreibung"

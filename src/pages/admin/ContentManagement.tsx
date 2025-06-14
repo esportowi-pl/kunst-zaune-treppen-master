@@ -48,8 +48,8 @@ interface WebsiteContent {
 const formSchema = z.object({
   page: z.string().min(1, "Seite ist erforderlich"),
   section: z.string().min(1, "Abschnitt ist erforderlich"),
-  title: z.string().optional(),
-  content: z.string().optional(),
+  title: z.string().min(1, "Titel ist erforderlich"),
+  content: z.string().min(1, "Inhalt ist erforderlich"),
   image_url: z.string().optional(),
 });
 
@@ -303,7 +303,7 @@ export default function ContentManagement() {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Titel</FormLabel>
+                    <FormLabel>Titel*</FormLabel>
                     <FormControl>
                       <Input placeholder="Titel des Abschnitts" {...field} />
                     </FormControl>
@@ -316,7 +316,7 @@ export default function ContentManagement() {
                 name="content"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Inhalt</FormLabel>
+                    <FormLabel>Inhalt*</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Inhalt des Abschnitts"
