@@ -50,7 +50,7 @@ const formSchema = z.object({
   section: z.string().min(1, "Abschnitt ist erforderlich"),
   title: z.string().min(1, "Titel ist erforderlich"),
   content: z.string().min(1, "Inhalt ist erforderlich"),
-  image_url: z.string().optional(),
+  image_url: z.string().url("Ungültige URL").optional().or(z.literal("")),
 });
 
 export default function ContentManagement() {
@@ -80,8 +80,8 @@ export default function ContentManagement() {
       form.reset({
         page: currentContent.page,
         section: currentContent.section,
-        title: currentContent.title || "",
-        content: currentContent.content || "",
+        title: currentContent.title,
+        content: currentContent.content,
         image_url: currentContent.image_url || "",
       });
     } else {
@@ -128,11 +128,20 @@ export default function ContentManagement() {
 
   const handleSave = async (values: z.infer<typeof formSchema>) => {
     try {
+      // Transform the data to match the database schema
+      const dataToSave = {
+        page: values.page,
+        section: values.section,
+        title: values.title,
+        content: values.content,
+        image_url: values.image_url || null,
+      };
+
       if (currentContent?.id) {
         // Update
         const { error } = await supabase
           .from("website_content")
-          .update(values)
+          .update(dataToSave)
           .eq("id", currentContent.id);
 
         if (error) throw error;
@@ -144,7 +153,7 @@ export default function ContentManagement() {
         // Insert
         const { error } = await supabase
           .from("website_content")
-          .insert(values);
+          .insert(dataToSave);
 
         if (error) throw error;
         toast({

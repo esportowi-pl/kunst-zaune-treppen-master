@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -49,7 +50,7 @@ interface Project {
 const formSchema = z.object({
   title: z.string().min(1, "Titel ist erforderlich"),
   description: z.string().min(1, "Beschreibung ist erforderlich"),
-  image_url: z.string().optional(),
+  image_url: z.string().url("Ungültige URL").optional().or(z.literal("")),
   category: z.string().min(1, "Kategorie ist erforderlich"),
   completion_date: z.string().optional(),
   location: z.string().optional(),
@@ -82,7 +83,7 @@ export default function ProjectsManagement() {
     if (currentProject) {
       form.reset({
         title: currentProject.title,
-        description: currentProject.description || "",
+        description: currentProject.description,
         image_url: currentProject.image_url || "",
         category: currentProject.category,
         completion_date: currentProject.completion_date 
@@ -134,11 +135,21 @@ export default function ProjectsManagement() {
 
   const handleSave = async (values: z.infer<typeof formSchema>) => {
     try {
+      // Transform the data to match the database schema
+      const dataToSave = {
+        title: values.title,
+        description: values.description,
+        image_url: values.image_url || null,
+        category: values.category,
+        completion_date: values.completion_date || null,
+        location: values.location || null,
+      };
+
       if (currentProject?.id) {
         // Update
         const { error } = await supabase
           .from("projects")
-          .update(values)
+          .update(dataToSave)
           .eq("id", currentProject.id);
 
         if (error) throw error;
@@ -150,7 +161,7 @@ export default function ProjectsManagement() {
         // Insert
         const { error } = await supabase
           .from("projects")
-          .insert(values);
+          .insert(dataToSave);
 
         if (error) throw error;
         toast({

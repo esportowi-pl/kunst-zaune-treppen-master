@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -47,7 +48,7 @@ const formSchema = z.object({
   name: z.string().min(1, "Name ist erforderlich"),
   position: z.string().min(1, "Position ist erforderlich"),
   bio: z.string().optional(),
-  image_url: z.string().optional(),
+  image_url: z.string().url("Ungültige URL").optional().or(z.literal("")),
 });
 
 export default function TeamManagement() {
@@ -121,11 +122,19 @@ export default function TeamManagement() {
 
   const handleSave = async (values: z.infer<typeof formSchema>) => {
     try {
+      // Transform the data to match the database schema
+      const dataToSave = {
+        name: values.name,
+        position: values.position,
+        bio: values.bio || null,
+        image_url: values.image_url || null,
+      };
+
       if (currentMember?.id) {
         // Update
         const { error } = await supabase
           .from("team_members")
-          .update(values)
+          .update(dataToSave)
           .eq("id", currentMember.id);
 
         if (error) throw error;
@@ -137,7 +146,7 @@ export default function TeamManagement() {
         // Insert
         const { error } = await supabase
           .from("team_members")
-          .insert(values);
+          .insert(dataToSave);
 
         if (error) throw error;
         toast({
@@ -345,7 +354,7 @@ export default function TeamManagement() {
           <DialogHeader>
             <DialogTitle>Teammitglied löschen</DialogTitle>
             <DialogDescription>
-              Sind Sie sicher, dass Sie dieses Teammitglied löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.
+              Są Sie sicher, dass Sie dieses Teammitglied löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
