@@ -1,8 +1,11 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, Star, Award, Shield, Clock, Phone, Users, MapPin } from 'lucide-react';
+import CertificatesSection from '@/components/trust/CertificatesSection';
+import ProjectCounters from '@/components/trust/ProjectCounters';
+import BeforeAfterGallery from '@/components/trust/BeforeAfterGallery';
+import ProjectMap from '@/components/trust/ProjectMap';
 
 const Hero = () => {
   return (
@@ -23,43 +26,42 @@ const Hero = () => {
                 <Star key={i} className="w-5 h-5 fill-current" />
               ))}
             </div>
-            <span className="text-lg">4.9/5 • Über 500 zufriedene Kunden</span>
+            <span className="text-lg">4.9/5 • Ponad 2547 zrealizowanych projektów</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Qualität und Handwerkskunst 
-            <span className="text-orange-400"> seit 2006</span>
+            Najwyższa jakość i rzemiosło 
+            <span className="text-orange-400"> od 2006 roku</span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl">
-            🏆 <strong>Deutschlands führender Anbieter</strong> für hochwertige Metallzäune und Holztreppen aus Polen. 
-            18 Jahre Erfahrung • 2500+ erfolgreiche Projekte • 100% Zufriedenheitsgarantie
+            🏆 <strong>Lider w Polsce</strong> w produkcji wysokiej jakości ogrodzeń metalowych i schodów drewnianych z Polski. 
+            18 lat doświadczenia • 2547+ udanych projektów • 100% gwarancja satysfakcji
           </p>
           
           <div className="flex flex-wrap gap-4 mb-8">
             <Link to="/kontakt">
               <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-xl flex items-center gap-2">
-                🎯 KOSTENLOSE BERATUNG <ArrowRight className="w-6 h-6" />
+                🎯 BEZPŁATNA KONSULTACJA <ArrowRight className="w-6 h-6" />
               </Button>
             </Link>
             <Link to="/projekte">
               <Button variant="outline" className="bg-transparent border-white hover:bg-white/10 text-white px-8 py-6 text-xl">
-                2500+ Projekte ansehen
+                2547+ Projektów do obejrzenia
               </Button>
             </Link>
           </div>
 
-          {/* Trust indicators */}
           <div className="flex flex-wrap gap-6 text-sm">
             <div className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-green-400" />
-              <span>10 Jahre Garantie</span>
+              <span>10 lat gwarancji</span>
             </div>
             <div className="flex items-center gap-2">
               <Award className="w-5 h-5 text-yellow-400" />
-              <span>TÜV-zertifiziert</span>
+              <span>Certyfikat TÜV</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-5 h-5 text-blue-400" />
-              <span>Lieferung in 14 Tagen</span>
+              <span>Dostawa w 14 dni</span>
             </div>
           </div>
         </div>
@@ -74,25 +76,25 @@ const TrustSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-green-800 mb-4">
-            ✅ Warum über 2500 Kunden uns vertrauen
+            ✅ Dlaczego ponad 2547 klientów nam ufa
           </h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center">
             <div className="text-4xl font-bold text-green-600 mb-2">18+</div>
-            <p className="text-sm">Jahre Erfahrung</p>
+            <p className="text-sm">Lat doświadczenia</p>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-green-600 mb-2">2500+</div>
-            <p className="text-sm">Zufriedene Kunden</p>
+            <div className="text-4xl font-bold text-green-600 mb-2">2547+</div>
+            <p className="text-sm">Zadowolonych klientów</p>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-green-600 mb-2">10</div>
-            <p className="text-sm">Jahre Garantie</p>
+            <p className="text-sm">Lat gwarancji</p>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-green-600 mb-2">100%</div>
-            <p className="text-sm">Deutsche Qualität</p>
+            <p className="text-sm">Niemiecka jakość</p>
           </div>
         </div>
       </div>
@@ -103,25 +105,25 @@ const TrustSection = () => {
 const Features = () => {
   const features = [
     {
-      title: "🔥 Metallzäune Premium",
-      description: "Hochwertige, maßgefertigte Metallzäune mit 10 Jahren Garantie. TÜV-zertifizierte Qualität direkt vom Hersteller.",
+      title: "🔥 Ogrodzenia Metalowe Premium",
+      description: "Wysokiej jakości, wykonane na zamówienie ogrodzenia metalowe z 10-letnią gwarancją. Jakość certyfikowana przez TÜV bezpośrednio od producenta.",
       image: "https://images.unsplash.com/photo-1486718448742-163732cd1544",
       link: "/metallzaune",
-      price: "Ab 89€/lfd. Meter"
+      price: "Od 89€/mb"
     },
     {
-      title: "🌟 Holztreppen Exklusiv",
-      description: "Elegante Holztreppen aus bestem polnischen Holz. Jede Treppe ein Unikat, perfekt auf Ihr Zuhause abgestimmt.",
+      title: "🌟 Schody Drewniane Ekskluzywne",
+      description: "Eleganckie schody drewniane z najlepszego polskiego drewna. Każde schody to unikat, idealnie dopasowany do Twojego domu.",
       image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb",
       link: "/holztreppen",
-      price: "Ab 1.299€"
+      price: "Od 1.299€"
     },
     {
-      title: "⚡ Spezialanfertigungen",
-      description: "Von Geländern bis Wintergärten - wir verwirklichen Ihre individuellen Wünsche mit höchster Präzision.",
+      title: "⚡ Projekty na Zamówienie",
+      description: "Od balustrad po ogrody zimowe - realizujemy Twoje indywidualne życzenia z najwyższą precyzją.",
       image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
       link: "/projekte",
-      price: "Auf Anfrage"
+      price: "Na zapytanie"
     }
   ];
 
@@ -129,9 +131,9 @@ const Features = () => {
     <section className="section-padding bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">🏆 Unsere Premium-Produkte</h2>
+          <h2 className="text-4xl font-bold mb-4">🏆 Nasze Produkty Premium</h2>
           <p className="text-xl max-w-3xl mx-auto">
-            Mit Präzision und Leidenschaft schaffen wir bleibende Werte für über 2500 zufriedene Kunden in ganz Deutschland.
+            Z precyzją i pasją tworzymy trwałe wartości dla ponad 2547 zadowolonych klientów w całych Niemczech.
           </p>
         </div>
 
@@ -153,7 +155,7 @@ const Features = () => {
                 <p className="text-gray-700 mb-4">{feature.description}</p>
                 <Link to={feature.link}>
                   <Button className="w-full bg-orange-500 hover:bg-orange-600">
-                    Mehr erfahren <ArrowRight className="w-4 h-4 ml-2" />
+                    Dowiedz się więcej <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
               </div>
@@ -169,26 +171,26 @@ const ProcessSection = () => {
   const steps = [
     {
       step: "1",
-      title: "Kostenlose Beratung",
-      description: "Wir beraten Sie ausführlich und erstellen ein unverbindliches Angebot",
+      title: "Bezpłatna Konsultacja",
+      description: "Doradzamy szczegółowo i tworzymy niewiążącą ofertę",
       icon: <Phone className="w-8 h-8" />
     },
     {
       step: "2", 
-      title: "Maßgenaue Planung",
-      description: "Unsere Experten vermessen vor Ort und planen Ihr Projekt bis ins Detail",
+      title: "Precyzyjne Planowanie",
+      description: "Nasi eksperci dokonują pomiarów na miejscu i planują Twój projekt w najdrobniejszych szczegółach",
       icon: <Users className="w-8 h-8" />
     },
     {
       step: "3",
-      title: "Produktion in Polen",
-      description: "Fertigung nach deutschen Qualitätsstandards in unserer modernen Manufaktur",
+      title: "Produkcja w Polsce",
+      description: "Produkcja zgodnie z niemieckimi standardami jakości w naszej nowoczesnej manufakturze",
       icon: <Award className="w-8 h-8" />
     },
     {
       step: "4",
-      title: "Lieferung & Montage",
-      description: "Pünktliche Lieferung und fachgerechte Montage durch unser Expertenteam",
+      title: "Dostawa i Montaż",
+      description: "Punktualna dostawa i fachowy montaż przez nasz zespół ekspertów",
       icon: <MapPin className="w-8 h-8" />
     }
   ];
@@ -197,9 +199,9 @@ const ProcessSection = () => {
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">🚀 So einfach geht's zu Ihrem Traumprodukt</h2>
+          <h2 className="text-4xl font-bold mb-4">🚀 Tak łatwo zrealizujesz swój wymarzony projekt</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Von der ersten Beratung bis zur finalen Montage - wir begleiten Sie durch den gesamten Prozess
+            Od pierwszej konsultacji do końcowego montażu - prowadzimy Cię przez cały proces
           </p>
         </div>
 
@@ -225,25 +227,25 @@ const ProcessSection = () => {
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      text: "Absolut perfekt! Die Qualität übertrifft alle Erwartungen. Unser Metallzaun sieht auch nach 3 Jahren noch aus wie neu. 100% Weiterempfehlung!",
-      name: "Familie Schmidt",
-      location: "München",
+      text: "Absolutnie doskonałe! Jakość przewyższa wszystkie oczekiwania. Nasze ogrodzenie metalowe po 3 latach wciąż wygląda jak nowe. 100% rekomendacji!",
+      name: "Rodzina Schmidt",
+      location: "Monachium",
       rating: 5,
-      project: "Metallzaun Premium, 45 lfd. Meter"
+      project: "Ogrodzenie Metalowe Premium, 45 mb"
     },
     {
-      text: "Von der Beratung bis zur Montage alles top! Die Holztreppe ist ein absoluter Hingucker und wurde millimetergenau eingepasst.",
+      title: "Od konsultacji do montażu wszystko top! Schody drewniane to absolutny hit i zostały dopasowane z precyzją do milimetra.",
       name: "Thomas Weber", 
       location: "Berlin",
       rating: 5,
-      project: "Gewendelte Eichentreppe"
+      project: "Kręcone schody dębowe"
     },
     {
-      text: "Termintreu, professionell und faire Preise. Nach 18 Monaten sind wir immer noch begeistert von unserem Zaun. Danke an das gesamte Team!",
-      name: "Familie Müller",
+      text: "Terminowo, profesjonalnie i w uczciwych cenach. Po 18 miesiącach wciąż jesteśmy zachwyceni naszym ogrodzeniem. Dziękujemy całemu zespołowi!",
+      name: "Rodzina Müller",
       location: "Hamburg", 
       rating: 5,
-      project: "Schmiedeeiserner Zaun mit Tor"
+      project: "Kute ogrodzenie z bramą"
     }
   ];
 
@@ -251,15 +253,15 @@ const TestimonialsSection = () => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">⭐ Das sagen unsere 2500+ Kunden</h2>
+          <h2 className="text-4xl font-bold mb-4">⭐ To mówią nasi 2547+ klientów</h2>
           <div className="flex justify-center items-center gap-2 mb-4">
             <div className="flex text-yellow-400">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-6 h-6 fill-current" />
               ))}
             </div>
-            <span className="text-xl font-bold">4.9/5 Sterne</span>
-            <span className="text-gray-600">(über 500 Bewertungen)</span>
+            <span className="text-xl font-bold">4,9/5 gwiazdek</span>
+            <span className="text-gray-600">(ponad 500 ocen)</span>
           </div>
         </div>
 
@@ -290,39 +292,39 @@ const CtaSection = () => {
     <section className="py-20 bg-gradient-to-r from-orange-500 to-red-500 text-white">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-4xl md:text-5xl font-bold mb-6">
-          🎯 Bereit für Ihr Traumprojekt?
+          🎯 Gotowy na swój wymarzony projekt?
         </h2>
         <p className="text-2xl mb-8 max-w-3xl mx-auto">
-          Über 2500 zufriedene Kunden vertrauen bereits auf unsere Qualität. 
-          <strong> Werden Sie der nächste!</strong>
+          Ponad 2547 zadowolonych klientów już ufa naszej jakości. 
+          <strong> Zostań następnym!</strong>
         </p>
         
         <div className="bg-white/10 backdrop-blur rounded-xl p-8 max-w-2xl mx-auto mb-10">
-          <h3 className="text-2xl font-bold mb-4">🚀 LIMITIERTES ANGEBOT</h3>
+          <h3 className="text-2xl font-bold mb-4">🚀 OFERTA LIMITOWANA</h3>
           <p className="text-lg mb-4">
-            <strong>Nur noch bis Ende des Monats:</strong><br/>
-            Kostenlose Beratung + Anfahrt + 5% Rabatt auf alle Projekte über 2.000€
+            <strong>Tylko do końca miesiąca:</strong><br/>
+            Bezpłatna konsultacja + dojazd + 5% rabatu na wszystkie projekty powyżej 2.000€
           </p>
           <div className="text-sm opacity-90">
-            *Gültig bei Beauftragung bis 31.12.2024
+            *Ważne przy zleceniu do 31.12.2024
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/kontakt">
             <Button className="bg-white text-orange-500 hover:bg-gray-100 px-10 py-6 text-xl font-bold">
-              📞 JETZT ANRUFEN: 0800 123 456 789
+              📞 ZADZWOŃ TERAZ: 0800 123 456 789
             </Button>
           </Link>
           <Link to="/kontakt">
             <Button variant="outline" className="border-white text-white hover:bg-white/10 px-10 py-6 text-xl">
-              💬 Online-Beratung starten
+              💬 Rozpocznij konsultację online
             </Button>
           </Link>
         </div>
 
         <div className="mt-8 text-sm opacity-90">
-          ✅ Kostenlose Beratung • ✅ Unverbindliches Angebot • ✅ 24h Rückruf-Garantie
+          ✅ Bezpłatna konsultacja • ✅ Niewiążąca oferta • ✅ Gwarancja oddzwonienia w 24h
         </div>
       </div>
     </section>
@@ -334,8 +336,12 @@ const Index = () => {
     <>
       <Hero />
       <TrustSection />
+      <CertificatesSection />
+      <ProjectCounters />
       <Features />
       <ProcessSection />
+      <BeforeAfterGallery />
+      <ProjectMap />
       <TestimonialsSection />
       <CtaSection />
     </>
