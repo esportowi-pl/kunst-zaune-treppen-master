@@ -9,7 +9,8 @@ import {
   Users, 
   Image, 
   Settings, 
-  LogOut 
+  LogOut,
+  Star
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -34,6 +35,7 @@ export default function AdminLayout() {
     { path: "/admin", icon: <LayoutDashboard className="mr-2 h-5 w-5" />, label: "Dashboard" },
     { path: "/admin/content", icon: <FileEdit className="mr-2 h-5 w-5" />, label: "Inhalte" },
     { path: "/admin/projects", icon: <Image className="mr-2 h-5 w-5" />, label: "Projekte" },
+    { path: "/admin/reviews", icon: <Star className="mr-2 h-5 w-5" />, label: "Opinie" },
     { path: "/admin/team", icon: <Users className="mr-2 h-5 w-5" />, label: "Team" },
     { path: "/admin/settings", icon: <Settings className="mr-2 h-5 w-5" />, label: "Einstellungen" },
   ];

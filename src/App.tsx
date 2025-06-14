@@ -20,6 +20,7 @@ import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import ContentManagement from "./pages/admin/ContentManagement";
 import ProjectsManagement from "./pages/admin/ProjectsManagement";
+import ReviewsManagement from "./pages/admin/ReviewsManagement";
 import TeamManagement from "./pages/admin/TeamManagement";
 import Settings from "./pages/admin/Settings";
 import CreateAdmin from "./pages/admin/CreateAdmin";
@@ -46,6 +47,7 @@ const App = () => (
               <Route index element={<Dashboard />} />
               <Route path="content" element={<ContentManagement />} />
               <Route path="projects" element={<ProjectsManagement />} />
+              <Route path="reviews" element={<ReviewsManagement />} />
               <Route path="team" element={<TeamManagement />} />
               <Route path="settings" element={<Settings />} />
             </Route>

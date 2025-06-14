@@ -6,6 +6,7 @@ import CertificatesSection from '@/components/trust/CertificatesSection';
 import ProjectCounters from '@/components/trust/ProjectCounters';
 import BeforeAfterGallery from '@/components/trust/BeforeAfterGallery';
 import ProjectMap from '@/components/trust/ProjectMap';
+import ReviewsSection from '@/components/reviews/ReviewsSection';
 
 const Hero = () => {
   return (
@@ -324,7 +325,7 @@ const CtaSection = () => {
         </div>
 
         <div className="mt-8 text-sm opacity-90">
-          ✅ Bezpłatna konsultacja • ✅ Niewiążąca oferta • ✅ Gwarancja oddzwonienia w 24h
+          ✅ Bezpłatna konsultacja • ✅ Niewiążącą oferta • ✅ Gwarancja oddzwonienia w 24h
         </div>
       </div>
     </section>
@@ -342,6 +343,7 @@ const Index = () => {
       <ProcessSection />
       <BeforeAfterGallery />
       <ProjectMap />
+      <ReviewsSection />
       <TestimonialsSection />
       <CtaSection />
     </>
