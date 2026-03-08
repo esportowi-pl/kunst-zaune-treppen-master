@@ -157,8 +157,7 @@ export default function ProjectsManagement() {
         });
       } else {
         // Insert
-        const { error } = await supabase
-          .from("projects")
+        const { error } = await fromTable("projects")
           .insert(dataToSave);
 
         if (error) throw error;
