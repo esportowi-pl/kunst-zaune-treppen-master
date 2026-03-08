@@ -1,206 +1,240 @@
 
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check } from 'lucide-react';
 
+const products = [
+  {
+    title: 'Ogrodzenia klasyczne',
+    description: 'Ponadczasowa elegancja z tradycyjnym wzornictwem i najwyższą jakością wykonania.',
+    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625',
+  },
+  {
+    title: 'Ogrodzenia nowoczesne',
+    description: 'Czyste linie i minimalistyczny design dla współczesnej architektury.',
+    image: 'https://images.unsplash.com/photo-1486718448742-163732cd1544',
+  },
+  {
+    title: 'Ogrodzenia kute',
+    description: 'Artystyczne prace kowalskie z indywidualnymi zdobieniami.',
+    image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05',
+  },
+  {
+    title: 'Ogrodzenia przemysłowe',
+    description: 'Solidne i funkcjonalne rozwiązania dla obiektów komercyjnych.',
+    image: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716',
+  },
+];
+
+const features = [
+  'Indywidualne doradztwo i projektowanie',
+  'Produkcja na wymiar według Twoich potrzeb',
+  'Najwyższej jakości materiały i obróbka',
+  'Trwałe malowanie proszkowe',
+  'Konstrukcje odporne na korozję',
+  'Profesjonalny montaż na miejscu',
+];
+
+const steps = [
+  { num: '01', title: 'Konsultacja', description: 'Bezpłatne doradztwo i wycena projektu' },
+  { num: '02', title: 'Projekt', description: 'Indywidualny design i transparentna oferta' },
+  { num: '03', title: 'Produkcja', description: 'Ręczna produkcja z najwyższą precyzją' },
+  { num: '04', title: 'Montaż', description: 'Terminowa dostawa i fachowy montaż' },
+];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6 },
+};
+
 const Metallzaune = () => {
-  const products = [
-    {
-      title: "Klassische Metallzäune",
-      description: "Zeitlose Eleganz mit traditionellem Design und höchster Qualität.",
-      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625",
-    },
-    {
-      title: "Moderne Metallzäune",
-      description: "Klare Linien und minimalistische Designs für zeitgemäße Architektur.",
-      image: "https://images.unsplash.com/photo-1486718448742-163732cd1544",
-    },
-    {
-      title: "Schmiedeeiserne Zäune",
-      description: "Kunstvolle Schmiedearbeiten mit individuellen Verzierungen.",
-      image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
-    },
-    {
-      title: "Industrielle Zäune",
-      description: "Robuste und funktionale Zäune für gewerbliche und industrielle Anwendungen.",
-      image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716",
-    },
-  ];
-
-  const features = [
-    "Individuelle Beratung und Planung",
-    "Maßanfertigung nach Ihren Wünschen",
-    "Hochwertige Materialien und Verarbeitung",
-    "Langlebige Pulverbeschichtung",
-    "Rostbeständige Konstruktionen",
-    "Professionelle Montage vor Ort"
-  ];
-
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative h-[70vh] flex items-center">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/60 z-10"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1486718448742-163732cd1544" 
-            alt="Eleganter Metallzaun" 
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60 z-10" />
+          <img
+            src="https://images.unsplash.com/photo-1486718448742-163732cd1544"
+            alt="Eleganckie ogrodzenie metalowe"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="container mx-auto px-4 relative z-20 text-white pt-16">
-          <div className="max-w-3xl">
-            <h1 className="mb-4">Hochwertige Metallzäune</h1>
-            <p className="text-lg md:text-xl mb-8">
-              Maßgefertigte Metallzäune, die Sicherheit und Ästhetik perfekt verbinden. Entdecken Sie unsere vielfältigen Designs und individuellen Lösungen.
+        <div className="container mx-auto px-4 relative z-20 text-white">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
+          >
+            <p className="text-sm uppercase tracking-[0.3em] text-white/70 mb-6 font-sans">
+              Ogrodzenia metalowe
             </p>
-          </div>
+            <h1 className="text-5xl md:text-7xl font-display font-semibold leading-[1.1] mb-8">
+              Ogrodzenia <span className="text-gold">najwyższej klasy</span>
+            </h1>
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl font-light leading-relaxed">
+              Maßgefertigte Metallzäune, die Sicherheit und Ästhetik perfekt verbinden.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Introduction Section */}
-      <section className="section-padding bg-white">
+      {/* Intro */}
+      <section className="section-padding bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="section-title">Kunstvolle Metallzäune für höchste Ansprüche</h2>
-              <p className="mb-6 text-lg">
-                Unsere Metallzäune vereinen Funktionalität mit ästhetischem Design und bieten nicht nur Schutz und Privatsphäre, sondern sind auch ein wichtiges gestalterisches Element für Ihr Grundstück.
-              </p>
-              <p className="mb-8">
-                Mit über 18 Jahren Erfahrung in der Metallverarbeitung fertigen wir Zäune, die durch ihre Qualität, Langlebigkeit und individuelle Gestaltung überzeugen.
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <motion.div {...fadeUp}>
+              <p className="text-sm uppercase tracking-[0.2em] text-accent mb-4 font-sans">O produkcie</p>
+              <h2 className="font-display text-4xl md:text-5xl font-semibold mb-8">
+                Artystyczne ogrodzenia dla wymagających
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                Nasze ogrodzenia metalowe łączą funkcjonalność z estetycznym wzornictwem. Zapewniają ochronę i prywatność, a jednocześnie stanowią ważny element architektoniczny Twojej posesji. Ponad 18 lat doświadczenia gwarantuje najwyższą jakość.
               </p>
               <ul className="space-y-3">
-                {features.slice(0, 3).map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 mt-0.5 text-warmAccent" />
-                    <span>{feature}</span>
+                {features.slice(0, 3).map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                    <Check className="w-4 h-4 mt-1 text-accent flex-shrink-0" />
+                    <span className="text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1482938289607-e9573fc25ebb" 
-                alt="Detailaufnahme eines Metallzauns" 
+            </motion.div>
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="aspect-[4/5] overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1482938289607-e9573fc25ebb"
+                alt="Detale ogrodzenia metalowego"
                 className="w-full h-full object-cover"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Products Gallery */}
-      <section className="section-padding bg-gray-50">
+      {/* Products */}
+      <section className="section-padding bg-charcoal text-white">
         <div className="container mx-auto px-4">
-          <h2 className="section-title text-center">Unsere Metallzaun-Modelle</h2>
-          <p className="text-center text-lg mb-12 max-w-3xl mx-auto">
-            Entdecken Sie unsere vielfältigen Designs von klassisch bis modern. Jeder Zaun wird individuell nach Ihren Wünschen und Maßen gefertigt.
-          </p>
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-gold mb-4 font-sans">Kolekcja</p>
+            <h2 className="font-display text-4xl md:text-5xl font-semibold">Nasze modele</h2>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            {products.map((product, index) => (
-              <div key={index} className="group">
-                <div className="image-hover warm-overlay rounded-lg overflow-hidden h-72 mb-4">
-                  <img 
-                    src={product.image} 
-                    alt={product.title} 
-                    className="w-full h-full object-cover"
+          <div className="grid md:grid-cols-2 gap-8">
+            {products.map((product, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group cursor-pointer"
+              >
+                <div className="aspect-[16/10] overflow-hidden mb-6">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="text-xl font-bold mb-2">{product.title}</h3>
-                <p className="text-gray-700">{product.description}</p>
-              </div>
+                <h3 className="font-display text-xl font-semibold mb-2">{product.title}</h3>
+                <p className="text-white/60 text-sm leading-relaxed">{product.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="section-padding bg-white">
+      {/* Process */}
+      <section className="section-padding bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="section-title text-center">Unser Prozess</h2>
-          <p className="text-center text-lg mb-12 max-w-3xl mx-auto">
-            Von der ersten Beratung bis zur finalen Installation – wir begleiten Sie durch jeden Schritt.
-          </p>
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-accent mb-4 font-sans">Proces</p>
+            <h2 className="font-display text-4xl md:text-5xl font-semibold">
+              Od pomysłu do realizacji
+            </h2>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              {
-                step: "1",
-                title: "Beratung & Planung",
-                description: "Wir beraten Sie ausführlich zu Ihren Optionen und erstellen einen detaillierten Plan."
-              },
-              {
-                step: "2",
-                title: "Design & Angebot",
-                description: "Nach Ihren Wünschen erstellen wir ein passendes Design und ein transparentes Angebot."
-              },
-              {
-                step: "3",
-                title: "Produktion",
-                description: "In unserer Werkstatt fertigen wir Ihren Zaun mit höchster handwerklicher Präzision."
-              },
-              {
-                step: "4",
-                title: "Lieferung & Montage",
-                description: "Wir liefern und montieren Ihren Zaun fachgerecht vor Ort."
-              }
-            ].map((item) => (
-              <div key={item.step} className="text-center p-6 border border-gray-200 rounded-lg hover:border-warmAccent transition-colors">
-                <div className="w-12 h-12 bg-warmAccent text-white rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="font-bold text-lg">{item.step}</span>
+          <div className="grid md:grid-cols-4 gap-8">
+            {steps.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-xs tracking-[0.2em] text-muted-foreground mb-3 font-sans">
+                  {step.num}
                 </div>
-                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                <p className="text-gray-700">{item.description}</p>
-              </div>
+                <h3 className="text-lg font-display font-semibold mb-2">{step.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="section-padding bg-gray-50">
+      {/* Features */}
+      <section className="section-padding bg-secondary/30">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" 
-                alt="Metallzaun Detail" 
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <motion.div
+              {...fadeUp}
+              className="aspect-[4/5] overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05"
+                alt="Detal ogrodzenia"
                 className="w-full h-full object-cover"
               />
-            </div>
-            <div>
-              <h2 className="section-title">Warum unsere Metallzäune?</h2>
-              <p className="mb-8 text-lg">
-                Unsere Metallzäune zeichnen sich durch herausragende Qualität, Langlebigkeit und individuelles Design aus. Wir verwenden nur hochwertige Materialien und setzen auf traditionelle Handwerkskunst kombiniert mit modernen Technologien.
+            </motion.div>
+            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.2 }}>
+              <p className="text-sm uppercase tracking-[0.2em] text-accent mb-4 font-sans">Jakość</p>
+              <h2 className="font-display text-4xl md:text-5xl font-semibold mb-8">
+                Dlaczego nasze ogrodzenia?
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                Nasze ogrodzenia wyróżniają się wyjątkową jakością, trwałością i indywidualnym wzornictwem. Stosujemy tylko najlepsze materiały, łącząc tradycyjne rzemiosło z nowoczesnymi technologiami.
               </p>
               <ul className="space-y-4">
-                {features.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 mt-0.5 text-warmAccent" />
-                    <span>{feature}</span>
+                {features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                    <Check className="w-4 h-4 mt-1 text-accent flex-shrink-0" />
+                    <span className="text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-black text-white">
+      {/* CTA */}
+      <section className="section-padding bg-charcoal text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Interessiert an einem Metallzaun?</h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto">
-            Kontaktieren Sie uns für eine kostenlose Beratung und ein unverbindliches Angebot.
-          </p>
-          <Link to="/kontakt">
-            <Button className="bg-warmAccent hover:bg-warmDark text-white px-8 py-4 text-lg rounded-md inline-flex items-center gap-2">
-              Anfrage stellen <ArrowRight className="w-5 h-5" />
-            </Button>
-          </Link>
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto">
+            <p className="text-sm uppercase tracking-[0.2em] text-gold mb-4 font-sans">Zapraszamy</p>
+            <h2 className="font-display text-4xl md:text-5xl font-semibold mb-6">
+              Zainteresowany ogrodzeniem?
+            </h2>
+            <p className="text-white/60 mb-10 leading-relaxed">
+              Skontaktuj się z nami po bezpłatną konsultację i niezobowiązującą wycenę.
+            </p>
+            <Link to="/kontakt">
+              <Button className="bg-white text-charcoal hover:bg-white/90 px-8 py-6 text-base font-medium rounded-sm">
+                Zapytaj o wycenę <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
     </>
