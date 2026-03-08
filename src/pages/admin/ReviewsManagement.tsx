@@ -122,8 +122,7 @@ export default function ReviewsManagement() {
     if (!confirm('Czy na pewno chcesz usunąć tę opinię?')) return;
 
     try {
-      const { error } = await supabase
-        .from('reviews')
+      const { error } = await fromTable('reviews')
         .delete()
         .eq('id', id);
 
