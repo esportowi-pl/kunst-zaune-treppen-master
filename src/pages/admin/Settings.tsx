@@ -84,8 +84,7 @@ export default function Settings() {
   const handleAddAdmin = async (values: z.infer<typeof addAdminFormSchema>) => {
     try {
       // Check if email already exists in admin_users
-      const { data: existingUser } = await supabase
-        .from("admin_users")
+      const { data: existingUser } = await fromTable("admin_users")
         .select("id")
         .eq("email", values.email)
         .single();
