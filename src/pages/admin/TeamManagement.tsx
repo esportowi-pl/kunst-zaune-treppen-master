@@ -131,8 +131,7 @@ export default function TeamManagement() {
 
       if (currentMember?.id) {
         // Update
-        const { error } = await supabase
-          .from("team_members")
+        const { error } = await fromTable("team_members")
           .update(dataToSave)
           .eq("id", currentMember.id);
 
