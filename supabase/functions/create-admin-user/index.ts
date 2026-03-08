@@ -4,17 +4,15 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.36.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
 };
 
 serve(async (req) => {
-  // Handle CORS preflight request
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    // Check request method
     if (req.method !== 'POST') {
       return new Response(
         JSON.stringify({ error: 'Method not allowed' }),
@@ -22,7 +20,6 @@ serve(async (req) => {
       );
     }
 
-    // Parse request body
     const { email, password } = await req.json();
 
     if (!email || !password) {
@@ -32,13 +29,19 @@ serve(async (req) => {
       );
     }
 
-    // Create a Supabase client with the Admin key
+    if (password.length < 6) {
+      return new Response(
+        JSON.stringify({ error: 'Password must be at least 6 characters' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
+      );
+    }
+
     const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Create a new user
+    // Create user
     const { data: userData, error: createUserError } = await supabaseAdmin.auth.admin.createUser({
       email,
       password,
@@ -49,7 +52,7 @@ serve(async (req) => {
       throw createUserError;
     }
 
-    // Add user to admin_users table
+    // Add to admin_users table
     const { error: addAdminError } = await supabaseAdmin
       .from('admin_users')
       .insert({
@@ -59,6 +62,8 @@ serve(async (req) => {
       });
 
     if (addAdminError) {
+      // Rollback: delete user if admin insert fails
+      await supabaseAdmin.auth.admin.deleteUser(userData.user.id);
       throw addAdminError;
     }
 
