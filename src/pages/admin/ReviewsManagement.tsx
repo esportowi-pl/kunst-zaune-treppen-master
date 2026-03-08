@@ -52,8 +52,7 @@ export default function ReviewsManagement() {
 
   const fetchReviews = async () => {
     try {
-      const { data, error } = await supabase
-        .from('reviews')
+      const { data, error } = await fromTable('reviews')
         .select('*')
         .order('created_at', { ascending: false });
 
