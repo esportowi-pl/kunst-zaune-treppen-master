@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { fromTable } from "@/integrations/supabase/helpers";
 import {
   Table,
   TableBody,
@@ -92,8 +92,7 @@ export default function TeamManagement() {
 
   const fetchMembers = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase
-      .from("team_members")
+    const { data, error } = await fromTable("team_members")
       .select("*")
       .order("created_at", { ascending: false });
 
@@ -132,8 +131,7 @@ export default function TeamManagement() {
 
       if (currentMember?.id) {
         // Update
-        const { error } = await supabase
-          .from("team_members")
+        const { error } = await fromTable("team_members")
           .update(dataToSave)
           .eq("id", currentMember.id);
 
@@ -144,8 +142,7 @@ export default function TeamManagement() {
         });
       } else {
         // Insert
-        const { error } = await supabase
-          .from("team_members")
+        const { error } = await fromTable("team_members")
           .insert(dataToSave);
 
         if (error) throw error;
@@ -169,8 +166,7 @@ export default function TeamManagement() {
     if (!currentMember?.id) return;
 
     try {
-      const { error } = await supabase
-        .from("team_members")
+      const { error } = await fromTable("team_members")
         .delete()
         .eq("id", currentMember.id);
 

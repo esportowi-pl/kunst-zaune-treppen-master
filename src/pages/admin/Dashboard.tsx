@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { fromTable } from "@/integrations/supabase/helpers";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileEdit, Image, Users } from "lucide-react";
 
@@ -14,9 +14,9 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchCounts = async () => {
       const [contentCount, projectsCount, teamCount] = await Promise.all([
-        supabase.from("website_content").select("id", { count: "exact", head: true }),
-        supabase.from("projects").select("id", { count: "exact", head: true }),
-        supabase.from("team_members").select("id", { count: "exact", head: true }),
+        fromTable("website_content").select("id", { count: "exact", head: true }),
+        fromTable("projects").select("id", { count: "exact", head: true }),
+        fromTable("team_members").select("id", { count: "exact", head: true }),
       ]);
       
       setCounts({

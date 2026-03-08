@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { fromTable } from "@/integrations/supabase/helpers";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -63,8 +64,7 @@ export default function Settings() {
 
   const fetchAdminUsers = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase
-      .from("admin_users")
+    const { data, error } = await fromTable("admin_users")
       .select("*")
       .order("created_at", { ascending: true });
 
@@ -84,8 +84,7 @@ export default function Settings() {
   const handleAddAdmin = async (values: z.infer<typeof addAdminFormSchema>) => {
     try {
       // Check if email already exists in admin_users
-      const { data: existingUser } = await supabase
-        .from("admin_users")
+      const { data: existingUser } = await fromTable("admin_users")
         .select("id")
         .eq("email", values.email)
         .single();
@@ -109,8 +108,7 @@ export default function Settings() {
       if (userError) throw userError;
 
       // Add user to admin_users table
-      const { error } = await supabase
-        .from("admin_users")
+      const { error } = await fromTable("admin_users")
         .insert({ 
           id: userData.user.id, 
           email: values.email,

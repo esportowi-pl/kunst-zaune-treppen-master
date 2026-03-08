@@ -2,6 +2,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { fromTable } from "@/integrations/supabase/helpers";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
 
@@ -58,8 +59,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAdminStatus = async (userId: string) => {
     try {
-      const { data, error } = await supabase
-        .from('admin_users')
+      const { data, error } = await fromTable('admin_users')
         .select('*')
         .eq('id', userId)
         .single();

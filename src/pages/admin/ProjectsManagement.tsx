@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { fromTable } from "@/integrations/supabase/helpers";
 import {
   Table,
   TableBody,
@@ -105,8 +105,7 @@ export default function ProjectsManagement() {
 
   const fetchProjects = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase
-      .from("projects")
+    const { data, error } = await fromTable("projects")
       .select("*")
       .order("created_at", { ascending: false });
 
@@ -147,8 +146,7 @@ export default function ProjectsManagement() {
 
       if (currentProject?.id) {
         // Update
-        const { error } = await supabase
-          .from("projects")
+        const { error } = await fromTable("projects")
           .update(dataToSave)
           .eq("id", currentProject.id);
 
@@ -159,8 +157,7 @@ export default function ProjectsManagement() {
         });
       } else {
         // Insert
-        const { error } = await supabase
-          .from("projects")
+        const { error } = await fromTable("projects")
           .insert(dataToSave);
 
         if (error) throw error;
@@ -184,8 +181,7 @@ export default function ProjectsManagement() {
     if (!currentProject?.id) return;
 
     try {
-      const { error } = await supabase
-        .from("projects")
+      const { error } = await fromTable("projects")
         .delete()
         .eq("id", currentProject.id);
 

@@ -14,7 +14,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Star, Trash2, Edit, Plus } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { fromTable } from '@/integrations/supabase/helpers';
 import { useToast } from '@/hooks/use-toast';
 
 interface Review {
@@ -52,8 +52,7 @@ export default function ReviewsManagement() {
 
   const fetchReviews = async () => {
     try {
-      const { data, error } = await supabase
-        .from('reviews')
+      const { data, error } = await fromTable('reviews')
         .select('*')
         .order('created_at', { ascending: false });
 
@@ -85,8 +84,7 @@ export default function ReviewsManagement() {
     
     try {
       if (editingReview) {
-        const { error } = await supabase
-          .from('reviews')
+        const { error } = await fromTable('reviews')
           .update(formData)
           .eq('id', editingReview.id);
 
@@ -97,8 +95,7 @@ export default function ReviewsManagement() {
           description: "Opinia została zaktualizowana.",
         });
       } else {
-        const { error } = await supabase
-          .from('reviews')
+        const { error } = await fromTable('reviews')
           .insert([formData]);
 
         if (error) throw error;
@@ -125,8 +122,7 @@ export default function ReviewsManagement() {
     if (!confirm('Czy na pewno chcesz usunąć tę opinię?')) return;
 
     try {
-      const { error } = await supabase
-        .from('reviews')
+      const { error } = await fromTable('reviews')
         .delete()
         .eq('id', id);
 
@@ -150,8 +146,7 @@ export default function ReviewsManagement() {
 
   const handleToggleFeatured = async (id: string, currentValue: boolean) => {
     try {
-      const { error } = await supabase
-        .from('reviews')
+      const { error } = await fromTable('reviews')
         .update({ is_featured: !currentValue })
         .eq('id', id);
 

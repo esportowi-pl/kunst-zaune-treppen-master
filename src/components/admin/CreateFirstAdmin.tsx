@@ -4,34 +4,46 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function CreateFirstAdmin() {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleCreateAdmin = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (password.length < 6) {
+      toast({ variant: "destructive", title: "Fehler", description: "Das Passwort muss mindestens 6 Zeichen lang sein." });
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast({ variant: "destructive", title: "Fehler", description: "Die Passwörter stimmen nicht überein." });
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://qjxfdfdujrjyedqukwfy.supabase.co/functions/v1/create-admin-user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqeGZkZmR1anJqeWVkcXVrd2Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk5MDQ4ODUsImV4cCI6MjA2NTQ4MDg4NX0.uwGY_lv30rGfBjIlsIk07g-UZhdB3HY2jDaatIsmwFk`
-        },
-        body: JSON.stringify({ email })
+      const { data, error } = await supabase.functions.invoke('create-admin-user', {
+        body: { email, password }
       });
 
-      const data = await response.json();
+      if (error) throw error;
 
-      if (data.success) {
+      if (data?.success) {
         toast({
           title: "Erfolg",
-          description: `Admin-Benutzer wurde erstellt. Temporäres Passwort: ${data.password}`,
+          description: "Admin-Benutzer wurde erfolgreich erstellt. Sie können sich jetzt anmelden.",
         });
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
       } else {
-        throw new Error(data.error || 'Fehler beim Erstellen des Admin-Benutzers');
+        throw new Error(data?.error || 'Fehler beim Erstellen des Admin-Benutzers');
       }
     } catch (error) {
       toast({
@@ -45,7 +57,7 @@ export default function CreateFirstAdmin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-muted p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Ersten Admin-Benutzer erstellen</CardTitle>
@@ -62,13 +74,28 @@ export default function CreateFirstAdmin() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
+            <Input
+              type="password"
+              placeholder="Passwort (min. 6 Zeichen)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength={6}
+            />
+            <Input
+              type="password"
+              placeholder="Passwort bestätigen"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              minLength={6}
+            />
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? 'Erstelle Admin...' : 'Admin erstellen'}
             </Button>
           </form>
-          <div className="mt-4 text-sm text-gray-600">
-            <p>Nach der Erstellung erhalten Sie ein temporäres Passwort.</p>
-            <p>Bitte ändern Sie es nach dem ersten Login.</p>
+          <div className="mt-4 text-sm text-muted-foreground">
+            <p>Nach der Erstellung können Sie sich unter <a href="/admin/login" className="underline">/admin/login</a> anmelden.</p>
           </div>
         </CardContent>
       </Card>

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { fromTable } from "@/integrations/supabase/helpers";
 import {
   Table,
   TableBody,
@@ -97,8 +97,7 @@ export default function ContentManagement() {
 
   const fetchContents = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase
-      .from("website_content")
+    const { data, error } = await fromTable("website_content")
       .select("*")
       .order("page", { ascending: true })
       .order("section", { ascending: true });
@@ -139,8 +138,7 @@ export default function ContentManagement() {
 
       if (currentContent?.id) {
         // Update
-        const { error } = await supabase
-          .from("website_content")
+        const { error } = await fromTable("website_content")
           .update(dataToSave)
           .eq("id", currentContent.id);
 
@@ -151,8 +149,7 @@ export default function ContentManagement() {
         });
       } else {
         // Insert
-        const { error } = await supabase
-          .from("website_content")
+        const { error } = await fromTable("website_content")
           .insert(dataToSave);
 
         if (error) throw error;
@@ -176,8 +173,7 @@ export default function ContentManagement() {
     if (!currentContent?.id) return;
 
     try {
-      const { error } = await supabase
-        .from("website_content")
+      const { error } = await fromTable("website_content")
         .delete()
         .eq("id", currentContent.id);
 

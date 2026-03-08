@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Star, Quote } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { fromTable } from '@/integrations/supabase/helpers';
 
 interface Review {
   id: string;
@@ -26,8 +26,7 @@ const ReviewsSection = () => {
 
   const fetchReviews = async () => {
     try {
-      const { data, error } = await supabase
-        .from('reviews')
+      const { data, error } = await fromTable('reviews')
         .select('*')
         .eq('is_featured', true)
         .order('created_at', { ascending: false })
