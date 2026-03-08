@@ -138,8 +138,7 @@ export default function ContentManagement() {
 
       if (currentContent?.id) {
         // Update
-        const { error } = await supabase
-          .from("website_content")
+        const { error } = await fromTable("website_content")
           .update(dataToSave)
           .eq("id", currentContent.id);
 
