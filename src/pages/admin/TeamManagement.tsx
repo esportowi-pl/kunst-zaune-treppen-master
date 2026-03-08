@@ -142,8 +142,7 @@ export default function TeamManagement() {
         });
       } else {
         // Insert
-        const { error } = await supabase
-          .from("team_members")
+        const { error } = await fromTable("team_members")
           .insert(dataToSave);
 
         if (error) throw error;
