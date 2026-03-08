@@ -105,8 +105,7 @@ export default function ProjectsManagement() {
 
   const fetchProjects = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase
-      .from("projects")
+    const { data, error } = await fromTable("projects")
       .select("*")
       .order("created_at", { ascending: false });
 
