@@ -1,269 +1,245 @@
 
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check } from 'lucide-react';
 
+const products = [
+  {
+    title: 'Schody proste',
+    description: 'Eleganckie i oszczędzające miejsce schody o prostym przebiegu.',
+    image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb',
+  },
+  {
+    title: 'Schody kręcone',
+    description: 'Artystyczne schody z zakręconymi stopniami i wyjątkowym charakterem.',
+    image: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716',
+  },
+  {
+    title: 'Schody spiralne',
+    description: 'Oszczędzające miejsce schody z centralnym słupem i wyrafinowanymi detalami.',
+    image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05',
+  },
+  {
+    title: 'Schody samonośne',
+    description: 'Nowoczesne schody o minimalistycznej konstrukcji i efekcie lewitacji.',
+    image: 'https://images.unsplash.com/photo-1486718448742-163732cd1544',
+  },
+];
+
+const woodTypes = [
+  { name: 'Dąb', description: 'Wytrzymały z charakterystycznym usłojeniem, idealny do klasycznych i nowoczesnych schodów.' },
+  { name: 'Buk', description: 'Równomierna struktura, wyjątkowo wytrzymały i wszechstronny.' },
+  { name: 'Orzech', description: 'Szlachetny wygląd z ciepłym, ciemnym odcieniem dla luksusowych schodów.' },
+  { name: 'Klon', description: 'Jasne drewno z delikatnym usłojeniem dla świeżego, nowoczesnego wyglądu.' },
+  { name: 'Jesion', description: 'Jasne do średniobrązowego drewno o wyraźnym usłojeniu i dużej elastyczności.' },
+  { name: 'Sosna', description: 'Ekonomiczna opcja o ciepłym odcieniu i rustykalnym charakterze.' },
+];
+
+const features = [
+  'Indywidualne planowanie i wizualizacja 3D',
+  'Wysokiej jakości drewno lite różnych gatunków',
+  'Precyzyjne rzemieślnicze wykonanie',
+  'Elastyczne możliwości projektowe',
+  'Trwała i zrównoważona konstrukcja',
+  'Profesjonalny montaż na miejscu',
+];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6 },
+};
+
 const Holztreppen = () => {
-  const products = [
-    {
-      title: "Geradläufige Treppen",
-      description: "Elegante und platzsparende Treppen mit geradem Verlauf.",
-      image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb",
-    },
-    {
-      title: "Gewendelte Treppen",
-      description: "Kunstvolle Treppen mit gewendelten Stufen für einen besonderen Charakter.",
-      image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716",
-    },
-    {
-      title: "Spindeltreppen",
-      description: "Platzsparende Treppen mit zentraler Spindel und raffinierten Details.",
-      image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
-    },
-    {
-      title: "Freitragende Treppen",
-      description: "Moderne Designtreppen mit minimalistischer Konstruktion und schwebender Optik.",
-      image: "https://images.unsplash.com/photo-1486718448742-163732cd1544",
-    },
-  ];
-
-  const woodTypes = [
-    {
-      name: "Eiche",
-      description: "Robust und langlebig mit markanter Maserung, ideal für klassische und moderne Treppen.",
-      color: "bg-amber-100"
-    },
-    {
-      name: "Buche",
-      description: "Gleichmäßige Struktur und Färbung, besonders belastbar und vielseitig einsetzbar.",
-      color: "bg-orange-100"
-    },
-    {
-      name: "Nussbaum",
-      description: "Edles Erscheinungsbild mit dunkler, warmer Färbung für luxuriöse Treppen.",
-      color: "bg-stone-200"
-    },
-    {
-      name: "Ahorn",
-      description: "Helles Holz mit feiner Maserung für einen frischen, modernen Look.",
-      color: "bg-yellow-50"
-    },
-    {
-      name: "Esche",
-      description: "Helles bis mittelbraunes Holz mit deutlicher Maserung und hoher Elastizität.",
-      color: "bg-amber-50"
-    },
-    {
-      name: "Kiefer",
-      description: "Preiswerte Option mit warmem Farbton und rustikalem Charakter.",
-      color: "bg-yellow-100"
-    },
-  ];
-
-  const features = [
-    "Individuelle Planung und 3D-Visualisierung",
-    "Hochwertiges Massivholz verschiedener Holzarten",
-    "Präzise handwerkliche Verarbeitung",
-    "Flexible Designmöglichkeiten",
-    "Langlebige und nachhaltige Konstruktion",
-    "Professionelle Montage vor Ort"
-  ];
-
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative h-[70vh] flex items-center">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/60 z-10"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1482938289607-e9573fc25ebb" 
-            alt="Elegante Holztreppe" 
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60 z-10" />
+          <img
+            src="https://images.unsplash.com/photo-1482938289607-e9573fc25ebb"
+            alt="Eleganckie schody drewniane"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="container mx-auto px-4 relative z-20 text-white pt-16">
-          <div className="max-w-3xl">
-            <h1 className="mb-4">Handgefertigte Holztreppen</h1>
-            <p className="text-lg md:text-xl mb-8">
-              Meisterhaftes Treppenhandwerk aus Polen – erleben Sie die perfekte Verbindung von Funktionalität und zeitloser Eleganz für Ihr Zuhause.
+        <div className="container mx-auto px-4 relative z-20 text-white">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
+          >
+            <p className="text-sm uppercase tracking-[0.3em] text-white/70 mb-6 font-sans">
+              Schody drewniane
             </p>
-          </div>
+            <h1 className="text-5xl md:text-7xl font-display font-semibold leading-[1.1] mb-8">
+              Ręcznie robione <span className="text-gold">schody</span>
+            </h1>
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl font-light leading-relaxed">
+              Mistrzowskie rzemiosło — idealne połączenie funkcjonalności i ponadczasowej elegancji.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Introduction Section */}
-      <section className="section-padding bg-white">
+      {/* Intro */}
+      <section className="section-padding bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="section-title">Maßgefertigte Holztreppen für Ihr Zuhause</h2>
-              <p className="mb-6 text-lg">
-                Unsere Holztreppen sind mehr als nur ein Verbindungselement zwischen Etagen – sie sind ein zentrales Gestaltungselement, das Ihrem Zuhause Charakter und Wärme verleiht.
-              </p>
-              <p className="mb-8">
-                Mit 18 Jahren Erfahrung in der Tischlerei fertigen wir Treppen, die durch höchste Qualität, handwerkliche Präzision und individuelle Gestaltung überzeugen.
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <motion.div {...fadeUp}>
+              <p className="text-sm uppercase tracking-[0.2em] text-accent mb-4 font-sans">O produkcie</p>
+              <h2 className="font-display text-4xl md:text-5xl font-semibold mb-8">
+                Schody na wymiar dla Twojego domu
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                Nasze schody drewniane to więcej niż element łączący piętra — to centralny element stylistyczny, który nadaje Twojemu domowi charakter i ciepło. 18 lat doświadczenia w stolarstwie gwarantuje najwyższą jakość.
               </p>
               <ul className="space-y-3">
-                {features.slice(0, 3).map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 mt-0.5 text-warmAccent" />
-                    <span>{feature}</span>
+                {features.slice(0, 3).map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                    <Check className="w-4 h-4 mt-1 text-accent flex-shrink-0" />
+                    <span className="text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1433086966358-54859d0ed716" 
-                alt="Detailaufnahme einer Holztreppe" 
+            </motion.div>
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="aspect-[4/5] overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1433086966358-54859d0ed716"
+                alt="Detal schodów drewnianych"
                 className="w-full h-full object-cover"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Products Gallery */}
-      <section className="section-padding bg-gray-50">
+      {/* Products */}
+      <section className="section-padding bg-charcoal text-white">
         <div className="container mx-auto px-4">
-          <h2 className="section-title text-center">Unsere Holztreppen-Modelle</h2>
-          <p className="text-center text-lg mb-12 max-w-3xl mx-auto">
-            Entdecken Sie unsere vielfältigen Treppenformen, die wir nach Ihren Wünschen und Raumverhältnissen maßanfertigen.
-          </p>
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-gold mb-4 font-sans">Kolekcja</p>
+            <h2 className="font-display text-4xl md:text-5xl font-semibold">Nasze modele schodów</h2>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            {products.map((product, index) => (
-              <div key={index} className="group">
-                <div className="image-hover warm-overlay rounded-lg overflow-hidden h-72 mb-4">
-                  <img 
-                    src={product.image} 
-                    alt={product.title} 
-                    className="w-full h-full object-cover"
+          <div className="grid md:grid-cols-2 gap-8">
+            {products.map((product, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group cursor-pointer"
+              >
+                <div className="aspect-[16/10] overflow-hidden mb-6">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="text-xl font-bold mb-2">{product.title}</h3>
-                <p className="text-gray-700">{product.description}</p>
-              </div>
+                <h3 className="font-display text-xl font-semibold mb-2">{product.title}</h3>
+                <p className="text-white/60 text-sm leading-relaxed">{product.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Wood Types */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="section-title text-center">Unsere Holzarten</h2>
-          <p className="text-center text-lg mb-12 max-w-3xl mx-auto">
-            Wir bieten verschiedene Holzarten für Ihre Treppe, jede mit einzigartigen Eigenschaften und Ästhetik.
-          </p>
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-accent mb-4 font-sans">Materiały</p>
+            <h2 className="font-display text-4xl md:text-5xl font-semibold">Gatunki drewna</h2>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            {woodTypes.map((wood, index) => (
-              <div key={index} className={`p-6 rounded-lg ${wood.color}`}>
-                <h3 className="text-xl font-bold mb-2">{wood.name}</h3>
-                <p className="text-gray-700">{wood.description}</p>
-              </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {woodTypes.map((wood, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="p-8 border border-border hover:border-accent transition-colors"
+              >
+                <h3 className="font-display text-lg font-semibold mb-3">{wood.name}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{wood.description}</p>
+              </motion.div>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
-            <p className="text-lg mb-6">
-              Wir bieten auch weitere Holzarten und Kombinationsmöglichkeiten an. Sprechen Sie uns gerne an!
+          <motion.div {...fadeUp} className="mt-16 text-center">
+            <p className="text-muted-foreground mb-6">
+              Oferujemy także inne gatunki drewna i kombinacje. Zapytaj nas!
             </p>
             <Link to="/kontakt">
-              <Button className="btn-primary inline-flex items-center gap-2">
-                Beratung anfragen <ArrowRight className="w-5 h-5" />
+              <Button className="bg-foreground text-background hover:bg-foreground/90 px-8 py-6 text-base font-medium rounded-sm">
+                Zapytaj o doradztwo <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="section-padding bg-gray-50">
+      {/* Features */}
+      <section className="section-padding bg-secondary/30">
         <div className="container mx-auto px-4">
-          <h2 className="section-title text-center">Unser Prozess</h2>
-          <p className="text-center text-lg mb-12 max-w-3xl mx-auto">
-            Von der ersten Idee bis zur fertigen Treppe – wir begleiten Sie durch jeden Schritt.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              {
-                step: "1",
-                title: "Beratung & Planung",
-                description: "Wir besprechen Ihre Wünsche, messen vor Ort und beraten Sie zu den besten Optionen."
-              },
-              {
-                step: "2",
-                title: "Design & Visualisierung",
-                description: "Wir erstellen detaillierte Pläne und 3D-Visualisierungen Ihrer zukünftigen Treppe."
-              },
-              {
-                step: "3",
-                title: "Fertigung",
-                description: "In unserer Tischlerei fertigen wir Ihre Treppe mit höchster handwerklicher Präzision."
-              },
-              {
-                step: "4",
-                title: "Lieferung & Montage",
-                description: "Wir liefern und montieren Ihre Treppe fachgerecht in Ihrem Zuhause."
-              }
-            ].map((item) => (
-              <div key={item.step} className="text-center p-6 border border-gray-200 rounded-lg hover:border-warmAccent transition-colors">
-                <div className="w-12 h-12 bg-warmAccent text-white rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="font-bold text-lg">{item.step}</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                <p className="text-gray-700">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="section-padding bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1486718448742-163732cd1544" 
-                alt="Holztreppe Detail" 
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <motion.div {...fadeUp} className="aspect-[4/5] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1486718448742-163732cd1544"
+                alt="Detal schodów"
                 className="w-full h-full object-cover"
               />
-            </div>
-            <div>
-              <h2 className="section-title">Warum unsere Holztreppen?</h2>
-              <p className="mb-8 text-lg">
-                Unsere Holztreppen zeichnen sich durch herausragende Qualität, langlebige Konstruktion und individuelles Design aus. Wir setzen auf traditionelles Handwerk kombiniert mit moderner Technik.
+            </motion.div>
+            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.2 }}>
+              <p className="text-sm uppercase tracking-[0.2em] text-accent mb-4 font-sans">Jakość</p>
+              <h2 className="font-display text-4xl md:text-5xl font-semibold mb-8">
+                Dlaczego nasze schody?
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                Nasze schody drewniane wyróżniają się wyjątkową jakością, trwałą konstrukcją i indywidualnym wzornictwem. Tradycyjne rzemiosło łączymy z nowoczesną techniką.
               </p>
               <ul className="space-y-4">
-                {features.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 mt-0.5 text-warmAccent" />
-                    <span>{feature}</span>
+                {features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                    <Check className="w-4 h-4 mt-1 text-accent flex-shrink-0" />
+                    <span className="text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-black text-white">
+      {/* CTA */}
+      <section className="section-padding bg-charcoal text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ihre Traumtreppe wartet auf Sie</h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto">
-            Kontaktieren Sie uns für eine kostenlose Beratung und ein unverbindliches Angebot.
-          </p>
-          <Link to="/kontakt">
-            <Button className="bg-warmAccent hover:bg-warmDark text-white px-8 py-4 text-lg rounded-md inline-flex items-center gap-2">
-              Anfrage stellen <ArrowRight className="w-5 h-5" />
-            </Button>
-          </Link>
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto">
+            <p className="text-sm uppercase tracking-[0.2em] text-gold mb-4 font-sans">Zapraszamy</p>
+            <h2 className="font-display text-4xl md:text-5xl font-semibold mb-6">
+              Twoje wymarzone schody czekają
+            </h2>
+            <p className="text-white/60 mb-10 leading-relaxed">
+              Skontaktuj się z nami po bezpłatną konsultację i niezobowiązującą wycenę.
+            </p>
+            <Link to="/kontakt">
+              <Button className="bg-white text-charcoal hover:bg-white/90 px-8 py-6 text-base font-medium rounded-sm">
+                Zapytaj o wycenę <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
     </>
