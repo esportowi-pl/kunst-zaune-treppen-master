@@ -146,8 +146,7 @@ export default function ProjectsManagement() {
 
       if (currentProject?.id) {
         // Update
-        const { error } = await supabase
-          .from("projects")
+        const { error } = await fromTable("projects")
           .update(dataToSave)
           .eq("id", currentProject.id);
 
