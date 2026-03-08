@@ -95,8 +95,7 @@ export default function ReviewsManagement() {
           description: "Opinia została zaktualizowana.",
         });
       } else {
-        const { error } = await supabase
-          .from('reviews')
+        const { error } = await fromTable('reviews')
           .insert([formData]);
 
         if (error) throw error;
