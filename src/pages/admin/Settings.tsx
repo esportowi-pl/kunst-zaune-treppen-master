@@ -64,8 +64,7 @@ export default function Settings() {
 
   const fetchAdminUsers = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase
-      .from("admin_users")
+    const { data, error } = await fromTable("admin_users")
       .select("*")
       .order("created_at", { ascending: true });
 
