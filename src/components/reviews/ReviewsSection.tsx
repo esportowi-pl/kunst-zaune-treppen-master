@@ -26,8 +26,7 @@ const ReviewsSection = () => {
 
   const fetchReviews = async () => {
     try {
-      const { data, error } = await supabase
-        .from('reviews')
+      const { data, error } = await fromTable('reviews')
         .select('*')
         .eq('is_featured', true)
         .order('created_at', { ascending: false })

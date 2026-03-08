@@ -173,8 +173,7 @@ export default function ContentManagement() {
     if (!currentContent?.id) return;
 
     try {
-      const { error } = await supabase
-        .from("website_content")
+      const { error } = await fromTable("website_content")
         .delete()
         .eq("id", currentContent.id);
 

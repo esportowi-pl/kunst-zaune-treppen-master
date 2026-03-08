@@ -166,8 +166,7 @@ export default function TeamManagement() {
     if (!currentMember?.id) return;
 
     try {
-      const { error } = await supabase
-        .from("team_members")
+      const { error } = await fromTable("team_members")
         .delete()
         .eq("id", currentMember.id);
 

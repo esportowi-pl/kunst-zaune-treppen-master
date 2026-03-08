@@ -181,8 +181,7 @@ export default function ProjectsManagement() {
     if (!currentProject?.id) return;
 
     try {
-      const { error } = await supabase
-        .from("projects")
+      const { error } = await fromTable("projects")
         .delete()
         .eq("id", currentProject.id);
 

@@ -108,8 +108,7 @@ export default function Settings() {
       if (userError) throw userError;
 
       // Add user to admin_users table
-      const { error } = await supabase
-        .from("admin_users")
+      const { error } = await fromTable("admin_users")
         .insert({ 
           id: userData.user.id, 
           email: values.email,

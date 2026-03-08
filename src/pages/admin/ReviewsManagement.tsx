@@ -146,8 +146,7 @@ export default function ReviewsManagement() {
 
   const handleToggleFeatured = async (id: string, currentValue: boolean) => {
     try {
-      const { error } = await supabase
-        .from('reviews')
+      const { error } = await fromTable('reviews')
         .update({ is_featured: !currentValue })
         .eq('id', id);
 

@@ -14,9 +14,9 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchCounts = async () => {
       const [contentCount, projectsCount, teamCount] = await Promise.all([
-        supabase.from("website_content").select("id", { count: "exact", head: true }),
-        supabase.from("projects").select("id", { count: "exact", head: true }),
-        supabase.from("team_members").select("id", { count: "exact", head: true }),
+        fromTable("website_content").select("id", { count: "exact", head: true }),
+        fromTable("projects").select("id", { count: "exact", head: true }),
+        fromTable("team_members").select("id", { count: "exact", head: true }),
       ]);
       
       setCounts({
