@@ -149,8 +149,7 @@ export default function ContentManagement() {
         });
       } else {
         // Insert
-        const { error } = await supabase
-          .from("website_content")
+        const { error } = await fromTable("website_content")
           .insert(dataToSave);
 
         if (error) throw error;
