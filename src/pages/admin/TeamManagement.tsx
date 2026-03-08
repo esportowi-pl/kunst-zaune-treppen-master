@@ -92,8 +92,7 @@ export default function TeamManagement() {
 
   const fetchMembers = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase
-      .from("team_members")
+    const { data, error } = await fromTable("team_members")
       .select("*")
       .order("created_at", { ascending: false });
 
