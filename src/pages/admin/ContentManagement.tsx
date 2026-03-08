@@ -97,8 +97,7 @@ export default function ContentManagement() {
 
   const fetchContents = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase
-      .from("website_content")
+    const { data, error } = await fromTable("website_content")
       .select("*")
       .order("page", { ascending: true })
       .order("section", { ascending: true });
