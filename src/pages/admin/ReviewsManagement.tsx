@@ -84,8 +84,7 @@ export default function ReviewsManagement() {
     
     try {
       if (editingReview) {
-        const { error } = await supabase
-          .from('reviews')
+        const { error } = await fromTable('reviews')
           .update(formData)
           .eq('id', editingReview.id);
 
