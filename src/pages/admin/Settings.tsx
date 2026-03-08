@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { fromTable } from "@/integrations/supabase/helpers";
 import { Button } from "@/components/ui/button";
 import {
   Card,
